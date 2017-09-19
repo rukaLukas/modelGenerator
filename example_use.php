@@ -1,6 +1,6 @@
 <?php
 include 'ModelGenerator.php';
-$model = new ModelGenerator('path/schema.sql', 'path/model_files');
+$model = new ModelGenerator('./schema.sql', './files');
 $model->run();
 
 
