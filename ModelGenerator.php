@@ -82,22 +82,18 @@ class ModelGenerator
         for ($i = 0; $i < count($this->allTables); $i++) {
             $table = $this->allTables[$i];
             $pattern = "`[a-z_0-9]+` (int|decimal|tinyint|varchar|text|datetime|timestamp)([(][0-9]{1,3}[)])?";
-            //$pattern = "`'/`[a-z_]+`.+[(][0-9]{1,3}[)]/";
-            //preg_match_all('/`[a-z_]+`.+[(][0-9]{1,3}[)]/', $this->allTables[$i], $matches);
             preg_match_all("/$pattern/", $this->allTables[$i], $matches);
 
             foreach ($matches[0] as $value) {
-                //foreach ($value as $key => $value) {
-                    $separado = explode(' ', $value);
+                $separado = explode(' ', $value);
 
-                    $field = str_replace('`', '', $separado[0]);
-                    if (strpos($field, '_')) {
-                        $field = $this->formatCamelCase($field);
-                    }
+                $field = str_replace('`', '', $separado[0]);
+                if (strpos($field, '_')) {
+                    $field = $this->formatCamelCase($field);
+                }
 
-                    $this->fields[$i][] = $field;
-                    $this->types[$i][] = $separado[1];
-                //}
+                $this->fields[$i][] = $field;
+                $this->types[$i][] = $separado[1];
             }
         }
     }
